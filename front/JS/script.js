@@ -17,7 +17,7 @@ function displayProducts(product) {
       <img src="${product.imageUrl}" alt="${product.altTxt}">
       <h3 class="productName">${product.name}</h3>
       <p class="productDescription">${product.description}</p>
+      <p class="productPrice">${product.price + " €"}</p>
     </article>
   </a>`
-
 }
