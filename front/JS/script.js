@@ -21,3 +21,4 @@ function displayProducts(product) {
     </article>
   </a>`
 }
+
