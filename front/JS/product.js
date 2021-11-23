@@ -47,13 +47,13 @@ fetch(`http://localhost:3000/api/products/${id}`)
   let selection = document.getElementById('colors')
   let options = `<option value="">--SVP, choisissez une couleur --</option>`
   
+  // On fait une boucle et on crée une variable (option) de l'API (product) et on veut les couleurs dispo (.colors)
   for (let option of product.colors){
-    //on ajoute a article le resultat de la fonction
+    //on ajoute a options le resultat de la fonction (plus bas)
     options += displayOptions(option)
-    // on integre article à notre container "items"
+    // on integre options à notre container "selection" (variable plus haut)
     selection.innerHTML = options
 }
-
 })
 
 
