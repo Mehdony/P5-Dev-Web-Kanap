@@ -53,7 +53,9 @@ fetch(`http://localhost:3000/api/products/${id}`)
     options += displayOptions(option)
     // on integre options à notre container "selection" (variable plus haut)
     selection.innerHTML = options
-}
+  }
+
+  //  
 })
 
 
