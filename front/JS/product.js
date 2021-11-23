@@ -54,8 +54,6 @@ fetch(`http://localhost:3000/api/products/${id}`)
     // on integre options à notre container "selection" (variable plus haut)
     selection.innerHTML = options
   }
-
-  //  
 })
 
 
@@ -66,4 +64,16 @@ function displayImg(product) {
 function displayOptions(product) {
     return ` <option value="${product}">${product}</option>`
 }
+
+//  On crée une variable qu'on relis à l'id de l'input de la page product html
+let inputValue = document.getElementById('quantity')
+
+// On ecoute l' event de la balise input graçe à la methode d'evenement ('input') 
+// qui permet d'écouter la saisie de l'utilisateur
+// Puis on crée une variable (quantite) qui correspond à la valeur demandé de l'utilisateur (event.input.value)
+//  ex: (1 piece, 3 pieces, 10 pieces ...)
+inputValue.addEventListener('input', function(event) {
+  let quantite = event.target.value; 
+  // localStorage.setItem('prout', quantite)
+});
 
