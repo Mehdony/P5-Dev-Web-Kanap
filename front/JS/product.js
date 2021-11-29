@@ -1,5 +1,5 @@
 //  Permet recuperer les données de l'url de la page (www.google:// id=qslr357446szerteqe  name=qdrmogiphuj   color=qsdrpiugh) 
-// const chainedecaractere = surlapage.lachainederequetedanslurl.recherche
+// const chainederequete = surlapage.lachainederequetedanslurl.recherche
 const queryString = window.location.search
 console.log(queryString)
 
@@ -11,6 +11,10 @@ console.log(urlParams)
 const id = urlParams.get('id')
 console.log(id)
 
+
+// let products = []
+
+
 // on fait une requete pour obetenir un produit avec un ID
 // On rajoute ${id} pour afficher les id 
 fetch(`http://localhost:3000/api/products/${id}`)
@@ -20,31 +24,28 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
   // L'IMAGE
   // On récupère le container de l'image et on le stock dans imageContainer
-  let imageContainer = document.querySelector('.item__img')
+ 
   // On crée une variable articleImg dans laquelle on stockera l'image
   let articleImg =''
   // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
   articleImg += displayImg(product) 
   // on integre articleImg à imageContainer grace à innerHTML
-  imageContainer.innerHTML = articleImg
+  document.querySelector('.item__img').innerHTML = articleImg
 
   // LE TITRE
   // On récupère la balise title et on y integre du text ( product.name soit le nom du produit dans l'api)
-  let title = document.getElementById('title')
-  title.innerText = product.name
+  document.getElementById('title').innerText = product.name
   
   // LE PRIX
   // On récupère la balise price et on y integre du text ( product.price soit le prix du produit dans l'api)
-  let price = document.getElementById('price')
-  price.innerText = product.price
+  document.getElementById('price').innerText = product.price
 
   // DESCRIPTION
 
-  let description = document.getElementById('description')
-  description.innerText = product.description
+  document.getElementById('description').innerText = product.description
 
   // OPTIONS
-  let selection = document.getElementById('colors')
+
   let options = `<option value="">--SVP, choisissez une couleur --</option>`
   
   // On fait une boucle et on crée une variable (option) de l'API (product) et on veut les couleurs dispo (.colors)
@@ -52,9 +53,11 @@ fetch(`http://localhost:3000/api/products/${id}`)
     //on ajoute a options le resultat de la fonction (plus bas)
     options += displayOptions(option)
     // on integre options à notre container "selection" (variable plus haut)
-    selection.innerHTML = options
   }
+  document.getElementById('colors').innerHTML = options
 })
+
+
 
 
 // on crée une fonction qui permet de retourner du code html dynamique
@@ -65,15 +68,46 @@ function displayOptions(product) {
     return ` <option value="${product}">${product}</option>`
 }
 
-//  On crée une variable qu'on relis à l'id de l'input de la page product html
-let inputValue = document.getElementById('quantity')
 
-// On ecoute l' event de la balise input graçe à la methode d'evenement ('input') 
-// qui permet d'écouter la saisie de l'utilisateur
-// Puis on crée une variable (quantite) qui correspond à la valeur demandé de l'utilisateur (event.input.value)
-//  ex: (1 piece, 3 pieces, 10 pieces ...)
-inputValue.addEventListener('input', function(event) {
-  let quantite = event.target.value; 
-  // localStorage.setItem('prout', quantite)
+//  On crée une variable qu'on relis à l'id de l'input de la page product html
+let inputValue = document.getElementById('quantity')  
+    inputValue.addEventListener('input', function(event) {
+  let quantity = event.target.value; 
+  console.log(quantity);
 });
+ 
+// 1ere etape récupérer le bouton ajouter au panier
+
+
+let addToCart = document.getElementById('addToCart') 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  Test LocalStorage
+
+
+// const id = urlParams.get('id')
+// localStorage.setItem('id', id)
+
+
+
+// let products = [id , quantite]
+//   console.log(products);
+//   localStorage.setItem('quantitéetid' , products)
+
+
+
 
