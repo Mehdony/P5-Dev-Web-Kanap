@@ -30,6 +30,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
   // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
   articleImg += displayImg(product) 
   // on integre articleImg à imageContainer grace à innerHTML
+  
   document.querySelector('.item__img').innerHTML = articleImg
 
   // LE TITRE
@@ -54,7 +55,24 @@ fetch(`http://localhost:3000/api/products/${id}`)
     options += displayOptions(option)
     // on integre options à notre container "selection" (variable plus haut)
   }
-  document.getElementById('colors').innerHTML = options
+  
+  let selection = document.getElementById('colors')
+
+  selection.innerHTML = options
+
+  selection.addEventListener('input', function(event) {
+    let selectValue = event.target.value; 
+    console.log(selectValue);
+  });
+
+  //  On crée une variable qu'on relis à l'id de l'input de la page product html
+    let inputValue = document.getElementById('quantity')  
+      
+  
+    inputValue.addEventListener('input', function(event) {
+    let quantity = event.target.value; 
+    console.log(quantity);
+  });
 })
 
 
@@ -69,17 +87,7 @@ function displayOptions(product) {
 }
 
 
-//  On crée une variable qu'on relis à l'id de l'input de la page product html
-let inputValue = document.getElementById('quantity')  
-    inputValue.addEventListener('input', function(event) {
-  let quantity = event.target.value; 
-  console.log(quantity);
-});
- 
-// 1ere etape récupérer le bouton ajouter au panier
 
-
-let addToCart = document.getElementById('addToCart') 
 
 
 
