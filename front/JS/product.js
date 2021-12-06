@@ -56,23 +56,58 @@ fetch(`http://localhost:3000/api/products/${id}`)
     // on integre options à notre container "selection" (variable plus haut)
   }
   
-  let selection = document.getElementById('colors')
-
-  selection.innerHTML = options
-
-  selection.addEventListener('input', function(event) {
-    let selectValue = event.target.value; 
-    console.log(selectValue);
-  });
-
-  //  On crée une variable qu'on relis à l'id de l'input de la page product html
-    let inputValue = document.getElementById('quantity')  
-      
+ document.getElementById('colors').innerHTML = options
   
-    inputValue.addEventListener('input', function(event) {
-    let quantity = event.target.value; 
-    console.log(quantity);
-  });
+
+  // selection.addEventListener('input', function(event) {
+  //   let selectValue = event.target.value; 
+  //   console.log(selectValue);
+  // });
+
+  // //  On crée une variable qu'on relis à l'id de l'input de la page product html
+  //   let inputValue = document.getElementById('quantity')  
+
+
+  //   inputValue.addEventListener('input', function(event) {
+  //   let quantity = event.target.value; 
+  //   console.log(quantity);
+   
+  // });
+
+  //récupération du bouton ajouter au panier
+  let cartBtn = document.getElementById('addToCart')
+  // au click sur le bouton envoie l'objet dans le tableau panier puis envoie le panier dans le local storage 
+ cartBtn.addEventListener('click' , (event) => {
+//comment récupérer les valeurs de colors et quantity dans l'objetPAnier?
+  event.preventDefault()
+  // tentative de récupération de la valeur de colors et quantity 
+  let optionItem = document.getElementById('colors').value
+  let quantityItem = document.getElementById('quantity').value 
+
+  // création de l'objet à envoyer dans le tableau cart 
+  let objetPanier = {
+    id : id,
+    quantity : quantityItem, 
+    option : optionItem  
+ }
+ 
+    //quantity et option ne renvoient rien  lors du consolelog de obetPanier
+    console.log(objetPanier);
+ 
+ 
+ const cart = JSON.parse(localStorage.getItem('cart')) || []
+ const founded = cart.find(e => e.id === product.id)
+ const quantity = document.getElementById('quantity').value
+
+ if (founded) {
+   founded.quantity += quantity
+ }else {
+   product.quantity = quantity
+   cart.push(objetPanier)
+ }
+ localStorage.setItem('cart' , JSON.stringify(cart))
+ })
+  
 })
 
 
@@ -85,10 +120,6 @@ function displayImg(product) {
 function displayOptions(product) {
     return ` <option value="${product}">${product}</option>`
 }
-
-
-
-
 
 
 
