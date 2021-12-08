@@ -31,15 +31,15 @@ fetch(`http://localhost:3000/api/products/${id}`)
     articleImg += displayImg(product)
     // on integre articleImg à imageContainer grace à innerHTML
 
-    document.querySelector('.item__img').innerHTML = articleImg
+    let imageUrl = document.querySelector('.item__img').innerHTML = articleImg
 
     // LE TITRE
     // On récupère la balise title et on y integre du text ( product.name soit le nom du produit dans l'api)
-    document.getElementById('title').innerText = product.name
+    let name = document.getElementById('title').innerText = product.name
 
     // LE PRIX
     // On récupère la balise price et on y integre du text ( product.price soit le prix du produit dans l'api)
-    document.getElementById('price').innerText = product.price
+    let price = document.getElementById('price').innerText = product.price
 
     // DESCRIPTION
 
@@ -59,46 +59,28 @@ fetch(`http://localhost:3000/api/products/${id}`)
     document.getElementById('colors').innerHTML = options
 
 
-    // selection.addEventListener('input', function(event) {
-    //   let selectValue = event.target.value; 
-    //   console.log(selectValue);
-    // });
-
-    // //  On crée une variable qu'on relis à l'id de l'input de la page product html
-    //   let inputValue = document.getElementById('quantity')  
-
-
-    //   inputValue.addEventListener('input', function(event) {
-    //   let quantity = event.target.value; 
-    //   console.log(quantity);
-
-    // });
-
     //récupération du bouton ajouter au panier
     document.getElementById('addToCart').addEventListener('click', (event) => {
       event.preventDefault()
       // récupération de la valeur de colors et quantity 
-      let optionItem = document.getElementById('colors').value
-      let quantityItem = document.getElementById('quantity').value
+      const optionItem = document.getElementById('colors').value
+      const quantityItem = parseInt(document.getElementById('quantity').value)
 
       // création de l'objet à envoyer dans le tableau cart 
-      let objetPanier = {
-        id: id,
-        quantity: quantityItem,
-        option: optionItem
-      }
-      console.log(objetPanier);
-
-
       const cart = JSON.parse(localStorage.getItem('cart')) || []
-      const founded = cart.find(e => e.id === product.id)
-      const quantity = document.getElementById('quantity').value
+      const founded = cart.find(e => e.id === id && e.option === optionItem)
 
       if (founded) {
-        founded.quantity += quantity
+        founded.quantity += quantityItem
       } else {
-        product.quantity = quantity
-        cart.push(objetPanier)
+        cart.push({
+          id: id,
+          quantity: quantityItem,
+          option: optionItem,
+          name: name,
+          image : imageUrl,
+          price : price
+        })
       }
       localStorage.setItem('cart', JSON.stringify(cart))
     })
