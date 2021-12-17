@@ -28,7 +28,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     // On crée une variable articleImg dans laquelle on stockera l'image
     let articleImg = ''
     // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
-    articleImg += displayImg(product)
+    articleImg = displayImg(product)
     // on integre articleImg à imageContainer grace à innerHTML
 
     let imageUrl = document.querySelector('.item__img').innerHTML = articleImg
@@ -84,12 +84,13 @@ fetch(`http://localhost:3000/api/products/${id}`)
       }
       localStorage.setItem('cart', JSON.stringify(cart))
     })
-
   })
 
 
 
 // on crée une fonction qui permet de retourner du code html dynamique
+
+// enlever les fonctions et mettre directement les chaines de carrectere la ou il faut
 function displayImg(product) {
   return `<img src=${product.imageUrl} alt="Photographie d'un canapé"></img>`
 }
