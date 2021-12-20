@@ -28,7 +28,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     // On crée une variable articleImg dans laquelle on stockera l'image
     let articleImg = ''
     // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
-    articleImg = displayImg(product)
+    articleImg = `<img src=${product.imageUrl} alt="Photographie d'un canapé"></img>`
     // on integre articleImg à imageContainer grace à innerHTML
 
     let imageUrl = document.querySelector('.item__img').innerHTML = articleImg
@@ -52,7 +52,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     // On fait une boucle et on crée une variable (option) de l'API (product) et on veut les couleurs dispo (.colors)
     for (let option of product.colors) {
       //on ajoute a options le resultat de la fonction (plus bas)
-      options += displayOptions(option)
+      options += ` <option value="${option}">${option}</option>`
       // on integre options à notre container "selection" (variable plus haut)
     }
 
@@ -63,6 +63,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     document.getElementById('addToCart').addEventListener('click', (event) => {
       event.preventDefault()
       // récupération de la valeur de colors et quantity 
+      window.location.href = 'cart.html'
       const optionItem = document.getElementById('colors').value
       const quantityItem = parseInt(document.getElementById('quantity').value)
 
@@ -85,20 +86,6 @@ fetch(`http://localhost:3000/api/products/${id}`)
       localStorage.setItem('cart', JSON.stringify(cart))
     })
   })
-
-
-
-// on crée une fonction qui permet de retourner du code html dynamique
-
-// enlever les fonctions et mettre directement les chaines de carrectere la ou il faut
-function displayImg(product) {
-  return `<img src=${product.imageUrl} alt="Photographie d'un canapé"></img>`
-}
-function displayOptions(product) {
-  return ` <option value="${product}">${product}</option>`
-}
-
-
 
 
 

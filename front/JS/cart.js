@@ -1,10 +1,8 @@
 //  On récupère les données du localstorage grace à la méthode getItem
 const cart = JSON.parse(localStorage.getItem("cart"));
 const cartContainer = document.getElementById("cart__items");
-
+// const qtyValue = document.getElementsByClassName('itemQuantity')
 displayCart(cart);
-
-
 
 function displayCart(cart) {
   console.log(cart);
@@ -37,6 +35,15 @@ function displayCart(cart) {
   cartContainer.innerHTML = modele;
 }
 
-
-
+  document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
+    quantityInput.addEventListener("change", (e) => {
+      let newvalue = `${e.target.value}`
+      console.log(newvalue)
+    })
+  })
+  
+  for (let product of cart) {
+    let price = product.price
+    console.log(price)
+  }
 
