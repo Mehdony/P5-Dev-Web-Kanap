@@ -9,7 +9,7 @@ function displayCart(cart) {
   let modele = "";
 
   for (let product of cart) {
-    modele += `<article class="cart__item" data-id=${product.id} data-color="${product.color}">
+    modele += `<article class="cart__item" data-id=${product.id} data-color="${product.option}">
     <div class="cart__item__img">
      ${product.image}
     </div>
@@ -33,17 +33,27 @@ function displayCart(cart) {
   }
 
   cartContainer.innerHTML = modele;
+  displayTotal()
 }
 
   document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
     quantityInput.addEventListener("change", (e) => {
-      let newvalue = `${e.target.value}`
-      console.log(newvalue)
+      let newvalue = parseInt(e.target.value)
+      const parent = e.target.parentElement.parentElement.parentElement.parentElement
+      console.log(parent.dataset.id);
+      // Mettre à jour le localStorage
+      displayTotal()
+
     })
   })
   
-  for (let product of cart) {
-    let price = product.price
-    console.log(price)
-  }
 
+function displayTotal () {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  let total = 0
+  let product = 0
+  // Boucle 
+  document.getElementById("totalQuantity").innerHTML = product
+  document.getElementById("totalPrice").innerHTML = total
+  // Enregristré dans le localstorage 
+}

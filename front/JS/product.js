@@ -63,7 +63,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     document.getElementById('addToCart').addEventListener('click', (event) => {
       event.preventDefault()
       // récupération de la valeur de colors et quantity 
-      window.location.href = 'cart.html'
+      
       const optionItem = document.getElementById('colors').value
       const quantityItem = parseInt(document.getElementById('quantity').value)
 
@@ -84,6 +84,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
         })
       }
       localStorage.setItem('cart', JSON.stringify(cart))
+      window.location.href = 'cart.html'
     })
   })
 
