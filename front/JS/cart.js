@@ -36,24 +36,75 @@ function displayCart(cart) {
   displayTotal()
 }
 
-  document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
-    quantityInput.addEventListener("change", (e) => {
-      let newvalue = parseInt(e.target.value)
-      const parent = e.target.parentElement.parentElement.parentElement.parentElement
-      console.log(parent.dataset.id);
-      // Mettre à jour le localStorage
-      displayTotal()
+document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
+  quantityInput.addEventListener("change", (e) => {
+    let newvalue = parseInt(e.target.value)
+    const parent = e.target.parentElement.parentElement.parentElement.parentElement
+    console.log(parent.dataset.id)
 
-    })
+    // Mettre à jour le localStorage
+
+    displayTotal(newvalue)
+
   })
-  
+})
 
-function displayTotal () {
+
+function displayTotal(qtyLS) {
   const cart = JSON.parse(localStorage.getItem("cart"));
   let total = 0
   let product = 0
   // Boucle 
+
+  let totalPriceCart = [];
+
+  for (let i = 0; i < cart.length; i++) {
+    let qtyLS = cart[i].quantity
+    let totalProduct = cart[i].price * qtyLS;
+    totalPriceCart.push(totalProduct)
+  }
+
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  total = totalPriceCart.reduce(reducer, 0);
+  console.log(total);
+
   document.getElementById("totalQuantity").innerHTML = product
   document.getElementById("totalPrice").innerHTML = total
   // Enregristré dans le localstorage 
 }
+
+
+
+
+
+
+// let addNewItem = function(quantity) {
+
+//   // retrieve it (Or create a blank array if there isn't any info saved yet),
+//   let items = JSON.parse(localStorage.getItem("cart"))
+
+
+//   // add to it, only if it's empty
+//   let item = items.find(item => item.id === id);
+
+//   if (item) {
+//     item.quantity = newvalue;
+//   } else {
+//     items.push({
+//       id,
+//       quantity,
+//       price
+//     })
+//   }
+
+//   // then put it back.
+//   localStorage.setItem('cart', JSON.stringify(items));
+//   console.log(items);
+// }
+// addNewItem(newvalue)
+
+// let produit = {
+//   id : idLS,
+//   qty : qtyLS
+// }
+// console.log(produit); 
