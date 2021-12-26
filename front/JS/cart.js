@@ -43,14 +43,14 @@ document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
     console.log(parent.dataset.id)
 
     // Mettre à jour le localStorage
-
-    displayTotal(newvalue)
+    // localStorage.setItem('cart',)
+    displayTotal()
 
   })
 })
 
 
-function displayTotal(qtyLS) {
+function displayTotal() {
   const cart = JSON.parse(localStorage.getItem("cart"));
   let total = 0
   let product = 0
