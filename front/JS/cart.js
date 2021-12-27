@@ -2,11 +2,13 @@
 const cart = JSON.parse(localStorage.getItem("cart"));
 const cartContainer = document.getElementById("cart__items");
 // const qtyValue = document.getElementsByClassName('itemQuantity')
-displayCart(cart);
+displayCart(cart)
+modifyQtt()
+displayTotal()
 
 function displayCart(cart) {
-  console.log(cart);
-  let modele = "";
+  console.log(cart)
+  let modele = ""
 
   for (let product of cart) {
     modele += `<article class="cart__item" data-id=${product.id} data-color="${product.option}">
@@ -29,60 +31,67 @@ function displayCart(cart) {
         </div>
       </div>
     </div>
-  </article> `;
+  </article> `
   }
 
   cartContainer.innerHTML = modele;
   displayTotal()
 }
 
-document.querySelectorAll(".itemQuantity").forEach((quantityInput) => {
-  quantityInput.addEventListener("change", (e) => {
-    let newvalue = parseInt(e.target.value)
-    const parent = e.target.parentElement.parentElement.parentElement.parentElement
-    console.log(parent.dataset.id)
-
-    // Mettre à jour le localStorage
-    // localStorage.setItem('cart',)
-    displayTotal()
-
-  })
-})
-
-
 function displayTotal() {
   const cart = JSON.parse(localStorage.getItem("cart"));
-  let total = 0
+  let total = 0;
   let product = 0
-  // Boucle 
+  // Boucle
 
-  let totalPriceCart = [];
+  let totalPriceCart = []
+  let totalArticleCart = []
 
   for (let i = 0; i < cart.length; i++) {
     let qtyLS = cart[i].quantity
     let totalProduct = cart[i].price * qtyLS;
     totalPriceCart.push(totalProduct)
+    totalArticleCart.push(qtyLS)
   }
 
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  product = totalArticleCart.reduce(reducer, 0)
   total = totalPriceCart.reduce(reducer, 0);
   console.log(total);
 
-  document.getElementById("totalQuantity").innerHTML = product
-  document.getElementById("totalPrice").innerHTML = total
-  // Enregristré dans le localstorage 
+  document.getElementById("totalQuantity").innerHTML = product;
+  document.getElementById("totalPrice").innerHTML = total;
+  // Enregristré dans le localstorage
 }
 
+function modifyQtt() {
+  let qttModif = document.querySelectorAll(".itemQuantity");
 
+  for (let k = 0; k < qttModif.length; k++) {
+    qttModif[k].addEventListener("change", (event) => {
+      event.preventDefault();
 
+      //Selection de l'element à modifier en fonction de son id ET sa couleur
+      let quantityModif = cart[k].quantity;
+      let qttModifValue = qttModif[k].valueAsNumber;
 
+      const resultFind = cart.find((el) => el.qttModifValue !== quantityModif);
 
+      resultFind.quantity = qttModifValue;
+      cart[k].quantity = resultFind.quantity;
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // refresh rapide
+      location.reload();
+    });
+  }
+}
 
 // let addNewItem = function(quantity) {
 
 //   // retrieve it (Or create a blank array if there isn't any info saved yet),
 //   let items = JSON.parse(localStorage.getItem("cart"))
-
 
 //   // add to it, only if it's empty
 //   let item = items.find(item => item.id === id);
@@ -107,4 +116,21 @@ function displayTotal() {
 //   id : idLS,
 //   qty : qtyLS
 // }
-// console.log(produit); 
+// console.log(produit);
+
+// const optionItem = document.getElementById('colors').value
+
+//     const cart = JSON.parse(localStorage.getItem('cart')) || []
+//       const founded = cart.find(e => e.id === id && e.option === optionItem)
+
+//       if (founded) {
+//         founded.quantity += newvalue
+//       } else {
+//         cart.push({
+
+//           quantity: newvalue,
+
+//         })
+//       }
+//       localStorage.setItem('cart', JSON.stringify(cart))
+//       window.location.href = 'cart.html'
