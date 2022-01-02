@@ -100,18 +100,4 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 
 
-//  Test LocalStorage
-
-
-// const id = urlParams.get('id')
-// localStorage.setItem('id', id)
-
-
-
-// let products = [id , quantite]
-//   console.log(products);
-//   localStorage.setItem('quantitéetid' , products)
-
-
-
 
