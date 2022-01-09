@@ -6,3 +6,6 @@ function showOrderID(){
 }
 
 showOrderID();
+
+
+//  Afficher le Total !! 

@@ -212,6 +212,11 @@ function getForm() {
 function postForm() {
   const btn_commander = document.getElementById("order")
 
+
+//  Vérication  de formulaire !!! 
+
+
+
   //Ecouter le panier
   btn_commander.addEventListener("click", (event) => {
     event.preventDefault()
@@ -253,7 +258,7 @@ function postForm() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        localStorage.clear()
+        localStorage.removeItem('cart')
         localStorage.setItem("orderId", data.orderId)
 
         window.location.href = "confirmation.html"
