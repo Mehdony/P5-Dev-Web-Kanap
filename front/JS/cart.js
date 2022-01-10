@@ -6,7 +6,6 @@ displayCart(cart)
 updateQuantity()
 displayTotal()
 deleteProduct()
-getForm()
 postForm()
 
 function displayCart(cart) {
@@ -119,8 +118,7 @@ function deleteProduct() {
 }
 
 // Formulaire avec regex
-function getForm() {
-  // Ajout des Regex
+
   let form = document.querySelector(".cart__order__form")
 
   //Création des expressions régulières
@@ -159,8 +157,10 @@ function getForm() {
 
     if (charRegExp.test(inputFirstName.value)) {
       firstNameErrorMsg.innerHTML = ''
+      return true
     } else {
       firstNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+      return false
     }
   };
 
@@ -170,9 +170,13 @@ function getForm() {
 
     if (charRegExp.test(inputLastName.value)) {
       lastNameErrorMsg.innerHTML = ''
+      return true
     } else {
       lastNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+      return false
     }
+
+    
   };
 
   //validation de l'adresse
@@ -181,8 +185,10 @@ function getForm() {
 
     if (addressRegExp.test(inputAddress.value)) {
       addressErrorMsg.innerHTML = ''
+      return true
     } else {
       addressErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+      return false
     }
   };
 
@@ -192,8 +198,10 @@ function getForm() {
 
     if (charRegExp.test(inputCity.value)) {
       cityErrorMsg.innerHTML = ''
+      return true
     } else {
       cityErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+      return false
     }
   };
 
@@ -203,24 +211,27 @@ function getForm() {
 
     if (emailRegExp.test(inputEmail.value)) {
       emailErrorMsg.innerHTML = ''
+      return true
     } else {
       emailErrorMsg.innerHTML = 'Veuillez renseigner votre email.'
+      return false
     }
   };
-}
+  
 
 //Envoi des informations client au localstorage
 function postForm() {
   const btn_commander = document.getElementById("order")
 
-
-//  Vérication  de formulaire !!! 
+  //  Vérication  de formulaire !!! 
 
 
 
   //Ecouter le panier
   btn_commander.addEventListener("click", (event) => {
     event.preventDefault()
+  
+
     //Récupération des coordonnées du formulaire client
     let inputName = document.getElementById('firstName')
     let inputLastName = document.getElementById('lastName')
@@ -236,39 +247,49 @@ function postForm() {
       productIdArray.push(cart[i].id)
     }
     console.log(productIdArray)
+   
+    if (validEmail(inputMail) &&
+      validCity(inputCity) &&
+      validAddress(inputAdress) &&
+      validLastName(inputLastName) &&
+      validFirstName(inputName)
+    ) {
 
-    const order = {
-      contact: {
-        firstName: inputName.value,
-        lastName: inputLastName.value,
-        address: inputAdress.value,
-        city: inputCity.value,
-        email: inputMail.value,
-      },
-      products: productIdArray,
+      const order = {
+        contact: {
+          firstName: inputName.value,
+          lastName: inputLastName.value,
+          address: inputAdress.value,
+          city: inputCity.value,
+          email: inputMail.value,
+        },
+        products: productIdArray,
+      }
+      console.log(order);
+      const fetchPostOption = {
+        method: 'POST',
+        body: JSON.stringify(order),
+        headers: {
+          'Accept': 'application/json',
+          "Content-Type": "application/json"
+        },
+      };
+
+
+      fetch("http://localhost:3000/api/products/order", fetchPostOption)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          localStorage.removeItem('cart')
+          localStorage.setItem("orderId", data.orderId)
+
+          window.location.href = "confirmation.html"
+        })
+        .catch((err) => {
+          alert("L'erreur suivante à été détectée: " + err.message)
+        })
     }
-    console.log(order);
-    const fetchPostOption = {
-      method: 'POST',
-      body: JSON.stringify(order),
-      headers: {
-        'Accept': 'application/json',
-        "Content-Type": "application/json"
-      },
-    };
 
-    fetch("http://localhost:3000/api/products/order", fetchPostOption)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        localStorage.removeItem('cart')
-        localStorage.setItem("orderId", data.orderId)
-
-        window.location.href = "confirmation.html"
-      })
-      .catch((err) => {
-        alert("L'erreur suivante à été détectée: " + err.message)
-      })
   })
 }
 
