@@ -65,6 +65,7 @@ function displayTotal() {
 
   document.getElementById("totalQuantity").innerHTML = product
   document.getElementById("totalPrice").innerHTML = total
+  return total
   // Enregristré dans le localstorage
 }
 
@@ -226,7 +227,9 @@ function postForm() {
     let inputAdress = document.getElementById('address')
     let inputCity = document.getElementById('city')
     let inputMail = document.getElementById('email')
-
+    // récupération du total
+    let total = displayTotal()
+    localStorage.setItem('total', total)
     //Construction d'un array depuis le local storage
     let productIdArray = []
     for (let i = 0; i < cart.length; i++) {
@@ -244,7 +247,7 @@ function postForm() {
       },
       products: productIdArray,
     }
-
+    console.log(order);
     const fetchPostOption = {
       method: 'POST',
       body: JSON.stringify(order),

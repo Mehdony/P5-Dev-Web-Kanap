@@ -12,8 +12,6 @@ const id = urlParams.get('id')
 console.log(id)
 
 
-// let products = []
-
 
 // on fait une requete pour obetenir un produit avec un ID
 // On rajoute ${id} pour afficher les id 
@@ -86,7 +84,8 @@ fetch(`http://localhost:3000/api/products/${id}`)
       localStorage.setItem('cart', JSON.stringify(cart))
       window.location.href = 'cart.html'
     })
-  })
+  }
+  )
 
 
 
