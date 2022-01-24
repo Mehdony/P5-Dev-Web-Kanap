@@ -1,15 +1,15 @@
 //  Permet recuperer les données de l'url de la page (www.google:// id=qslr357446szerteqe  name=qdrmogiphuj   color=qsdrpiugh) 
 // const chainederequete = surlapage.lachainederequetedanslurl.recherche
 const queryString = window.location.search
-console.log(queryString)
+
 
 // permet d'analyser les paramètres de  la chaîne de requête (parametre dans la console)
 const urlParams = new URLSearchParams(queryString)
-console.log(urlParams)
+
 
 //permet d'obtenir l'id (id de la page (url))
 const id = urlParams.get('id')
-console.log(id)
+
 
 
 

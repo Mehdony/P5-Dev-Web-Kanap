@@ -1,5 +1,5 @@
 // on va récupérer dans le dom le container 'items' afin de par la suite lui integrer du contenu 
-let items = document.querySelector("#items")
+const items = document.querySelector("#items")
 
 //  On fait un appel à l'API grâce a 'fetch' et ("l'url de l'API") 
 fetch("http://localhost:3000/api/products")

@@ -9,7 +9,7 @@ deleteProduct()
 postForm()
 
 function displayCart(cart) {
-  console.log(cart)
+ 
   let modele = ""
 
   for (let product of cart) {
@@ -60,7 +60,7 @@ function displayTotal() {
   const reducer = (accumulator, currentValue) => accumulator + currentValue
   product = totalArticleCart.reduce(reducer, 0)
   total = totalPriceCart.reduce(reducer, 0)
-  console.log(total)
+  
 
   document.getElementById("totalQuantity").innerHTML = product
   document.getElementById("totalPrice").innerHTML = total
@@ -246,7 +246,7 @@ function postForm() {
     for (let i = 0; i < cart.length; i++) {
       productIdArray.push(cart[i].id)
     }
-    console.log(productIdArray)
+   
    
     if (validEmail(inputMail) &&
       validCity(inputCity) &&
@@ -265,7 +265,7 @@ function postForm() {
         },
         products: productIdArray,
       }
-      console.log(order);
+     
       const fetchPostOption = {
         method: 'POST',
         body: JSON.stringify(order),
@@ -279,7 +279,7 @@ function postForm() {
       fetch("http://localhost:3000/api/products/order", fetchPostOption)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
+          
           localStorage.removeItem('cart')
           localStorage.setItem("orderId", data.orderId)
 
