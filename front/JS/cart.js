@@ -9,7 +9,7 @@ deleteProduct()
 postForm()
 
 function displayCart(cart) {
- 
+
   let modele = ""
 
   for (let product of cart) {
@@ -56,11 +56,10 @@ function displayTotal() {
     totalArticleCart.push(quantityLocalStorage)
   }
 
-
   const reducer = (accumulator, currentValue) => accumulator + currentValue
   product = totalArticleCart.reduce(reducer, 0)
   total = totalPriceCart.reduce(reducer, 0)
-  
+
 
   document.getElementById("totalQuantity").innerHTML = product
   document.getElementById("totalPrice").innerHTML = total
@@ -119,105 +118,105 @@ function deleteProduct() {
 
 // Formulaire avec regex
 
-  let form = document.querySelector(".cart__order__form")
+let form = document.querySelector(".cart__order__form")
 
-  //Création des expressions régulières
-  let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$')
-  let charRegExp = new RegExp("^[a-zA-Z ,.'-]+$")
-  let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+")
+//Création des expressions régulières
+let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$')
+let charRegExp = new RegExp("^[a-zA-Z ,.'-]+$")
+let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+")
 
-  // Ecoute de la modification du prénom
-  form.firstName.addEventListener('change', function () {
-    validFirstName(this)
-  })
+// Ecoute de la modification du prénom
+form.firstName.addEventListener('change', function () {
+  validFirstName(this)
+})
 
-  // Ecoute de la modification du nom
-  form.lastName.addEventListener('change', function () {
-    validLastName(this)
-  })
+// Ecoute de la modification du nom
+form.lastName.addEventListener('change', function () {
+  validLastName(this)
+})
 
-  // Ecoute de la modification de l'adresse
-  form.address.addEventListener('change', function () {
-    validAddress(this)
-  })
+// Ecoute de la modification de l'adresse
+form.address.addEventListener('change', function () {
+  validAddress(this)
+})
 
-  // Ecoute de la modification de la ville
-  form.city.addEventListener('change', function () {
-    validCity(this)
-  })
+// Ecoute de la modification de la ville
+form.city.addEventListener('change', function () {
+  validCity(this)
+})
 
-  // Ecoute de la modification de l'email
-  form.email.addEventListener('change', function () {
-    validEmail(this)
-  })
+// Ecoute de la modification de l'email
+form.email.addEventListener('change', function () {
+  validEmail(this)
+})
 
-  //validation du prénom
-  const validFirstName = function (inputFirstName) {
-    let firstNameErrorMsg = inputFirstName.nextElementSibling
+//validation du prénom
+const validFirstName = function (inputFirstName) {
+  let firstNameErrorMsg = inputFirstName.nextElementSibling
 
-    if (charRegExp.test(inputFirstName.value)) {
-      firstNameErrorMsg.innerHTML = ''
-      return true
-    } else {
-      firstNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
-      return false
-    }
-  };
+  if (charRegExp.test(inputFirstName.value)) {
+    firstNameErrorMsg.innerHTML = ''
+    return true
+  } else {
+    firstNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+    return false
+  }
+};
 
-  //validation du nom
-  const validLastName = function (inputLastName) {
-    let lastNameErrorMsg = inputLastName.nextElementSibling
+//validation du nom
+const validLastName = function (inputLastName) {
+  let lastNameErrorMsg = inputLastName.nextElementSibling
 
-    if (charRegExp.test(inputLastName.value)) {
-      lastNameErrorMsg.innerHTML = ''
-      return true
-    } else {
-      lastNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
-      return false
-    }
+  if (charRegExp.test(inputLastName.value)) {
+    lastNameErrorMsg.innerHTML = ''
+    return true
+  } else {
+    lastNameErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+    return false
+  }
 
-    
-  };
 
-  //validation de l'adresse
-  const validAddress = function (inputAddress) {
-    let addressErrorMsg = inputAddress.nextElementSibling
+};
 
-    if (addressRegExp.test(inputAddress.value)) {
-      addressErrorMsg.innerHTML = ''
-      return true
-    } else {
-      addressErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
-      return false
-    }
-  };
+//validation de l'adresse
+const validAddress = function (inputAddress) {
+  let addressErrorMsg = inputAddress.nextElementSibling
 
-  //validation de la ville
-  const validCity = function (inputCity) {
-    let cityErrorMsg = inputCity.nextElementSibling;
+  if (addressRegExp.test(inputAddress.value)) {
+    addressErrorMsg.innerHTML = ''
+    return true
+  } else {
+    addressErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+    return false
+  }
+};
 
-    if (charRegExp.test(inputCity.value)) {
-      cityErrorMsg.innerHTML = ''
-      return true
-    } else {
-      cityErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
-      return false
-    }
-  };
+//validation de la ville
+const validCity = function (inputCity) {
+  let cityErrorMsg = inputCity.nextElementSibling;
 
-  //validation de l'email
-  const validEmail = function (inputEmail) {
-    let emailErrorMsg = inputEmail.nextElementSibling
+  if (charRegExp.test(inputCity.value)) {
+    cityErrorMsg.innerHTML = ''
+    return true
+  } else {
+    cityErrorMsg.innerHTML = 'Veuillez renseigner ce champ.'
+    return false
+  }
+};
 
-    if (emailRegExp.test(inputEmail.value)) {
-      emailErrorMsg.innerHTML = ''
-      return true
-    } else {
-      emailErrorMsg.innerHTML = 'Veuillez renseigner votre email.'
-      return false
-    }
-  };
-  
+//validation de l'email
+const validEmail = function (inputEmail) {
+  let emailErrorMsg = inputEmail.nextElementSibling
+
+  if (emailRegExp.test(inputEmail.value)) {
+    emailErrorMsg.innerHTML = ''
+    return true
+  } else {
+    emailErrorMsg.innerHTML = 'Veuillez renseigner votre email.'
+    return false
+  }
+};
+
 
 //Envoi des informations client au localstorage
 function postForm() {
@@ -230,7 +229,7 @@ function postForm() {
   //Ecouter le panier
   btn_commander.addEventListener("click", (event) => {
     event.preventDefault()
-  
+
 
     //Récupération des coordonnées du formulaire client
     let inputName = document.getElementById('firstName')
@@ -246,8 +245,8 @@ function postForm() {
     for (let i = 0; i < cart.length; i++) {
       productIdArray.push(cart[i].id)
     }
-   
-   
+
+
     if (validEmail(inputMail) &&
       validCity(inputCity) &&
       validAddress(inputAdress) &&
@@ -265,7 +264,7 @@ function postForm() {
         },
         products: productIdArray,
       }
-     
+
       const fetchPostOption = {
         method: 'POST',
         body: JSON.stringify(order),
@@ -279,7 +278,7 @@ function postForm() {
       fetch("http://localhost:3000/api/products/order", fetchPostOption)
         .then((response) => response.json())
         .then((data) => {
-          
+
           localStorage.removeItem('cart')
           localStorage.setItem("orderId", data.orderId)
 

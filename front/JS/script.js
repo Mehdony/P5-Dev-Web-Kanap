@@ -3,7 +3,7 @@ const items = document.querySelector("#items")
 
 //  On fait un appel à l'API grâce a 'fetch' et ("l'url de l'API") 
 fetch("http://localhost:3000/api/products")
-  // ensuite on prend la réponse et on la converti en Json
+  // ensuite on prend la réponse et on la converti au format Json
   .then(response => response.json())
   // ensuite on prend la réponse et on effectue les actions désirées 
   .then(response => {

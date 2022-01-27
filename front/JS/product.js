@@ -1,16 +1,10 @@
 //  Permet recuperer les données de l'url de la page (www.google:// id=qslr357446szerteqe  name=qdrmogiphuj   color=qsdrpiugh) 
 // const chainederequete = surlapage.lachainederequetedanslurl.recherche
 const queryString = window.location.search
-
-
 // permet d'analyser les paramètres de  la chaîne de requête (parametre dans la console)
 const urlParams = new URLSearchParams(queryString)
-
-
 //permet d'obtenir l'id (id de la page (url))
 const id = urlParams.get('id')
-
-
 
 
 // on fait une requete pour obetenir un produit avec un ID
@@ -19,14 +13,10 @@ fetch(`http://localhost:3000/api/products/${id}`)
   .then(response => response.json())
   // on utilise la réponse pour afficher image, titre etc
   .then(product => {
-
-    // L'IMAGE
-    // On récupère le container de l'image et on le stock dans imageContainer
-
     // On crée une variable articleImg dans laquelle on stockera l'image
     let articleImg = ''
     // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
-    articleImg = `<img src=${product.imageUrl} alt="Photographie d'un canapé"></img>`
+    articleImg = `<img src=${product.imageUrl} alt=${product.altTxt}></img>`
     // on integre articleImg à imageContainer grace à innerHTML
 
     let imageUrl = document.querySelector('.item__img').innerHTML = articleImg
