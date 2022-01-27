@@ -6,16 +6,12 @@ fetch(`http://localhost:3000/api/products/${id}`)
   .then((response) => response.json())
   .then((product) => {
     let articleImg = "" 
-
+    
     articleImg = `<img src=${product.imageUrl} alt=${product.altTxt}></img>` 
-
-    let imageUrl = (document.querySelector(".item__img").innerHTML =
-      articleImg) 
-
+   
+    let imageUrl = (document.querySelector(".item__img").innerHTML = articleImg) 
     let name = (document.getElementById("title").innerText = product.name) 
-
     let price = (document.getElementById("price").innerText = product.price) 
-
     document.getElementById("description").innerText = product.description 
 
     let options = `<option value="">--SVP, choisissez une couleur --</option>` 
