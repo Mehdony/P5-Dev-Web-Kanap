@@ -1,7 +1,7 @@
 //  On récupère les données du localstorage grace à la méthode getItem
 const cart = JSON.parse(localStorage.getItem("cart"))
 const cartContainer = document.getElementById("cart__items")
-// const qtyValue = document.getElementsByClassName('itemQuantity')
+
 
 displayCart(cart)
 updateQuantity()
@@ -241,8 +241,6 @@ function postForm() {
     let inputCity = document.getElementById('city')
     let inputMail = document.getElementById('email')
     // récupération du total
-    let total = displayTotal()
-    localStorage.setItem('total', total)
     //Construction d'un array depuis le local storage
     let productIdArray = []
     for (let i = 0; i < cart.length; i++) {

@@ -11,8 +11,6 @@ function showOrderID(){
     const orderIdContainer = document.getElementById("orderId");
     orderIdContainer.innerText = id;
 
-    
-    localStorage.clear();
 }
 
 showOrderID();
