@@ -1,92 +1,55 @@
-//  Permet recuperer les données de l'url de la page (www.google:// id=qslr357446szerteqe  name=qdrmogiphuj   color=qsdrpiugh) 
-// const chainederequete = surlapage.lachainederequetedanslurl.recherche
-const queryString = window.location.search
-// permet d'analyser les paramètres de  la chaîne de requête (parametre dans la console)
-const urlParams = new URLSearchParams(queryString)
-//permet d'obtenir l'id (id de la page (url))
-const id = urlParams.get('id')
+const queryString = window.location.search 
+const urlParams = new URLSearchParams(queryString) 
+const id = urlParams.get("id") 
 
-
-// on fait une requete pour obetenir un produit avec un ID
-// On rajoute ${id} pour afficher les id 
 fetch(`http://localhost:3000/api/products/${id}`)
-  .then(response => response.json())
-  // on utilise la réponse pour afficher image, titre etc
-  .then(product => {
-    // On crée une variable articleImg dans laquelle on stockera l'image
-    let articleImg = ''
-    // on stock le resultat de la fonction displayImage (l'image produit) dans articleImg
-    articleImg = `<img src=${product.imageUrl} alt=${product.altTxt}></img>`
-    // on integre articleImg à imageContainer grace à innerHTML
+  .then((response) => response.json())
+  .then((product) => {
+    let articleImg = "" 
 
-    let imageUrl = document.querySelector('.item__img').innerHTML = articleImg
+    articleImg = `<img src=${product.imageUrl} alt=${product.altTxt}></img>` 
 
-    // LE TITRE
-    // On récupère la balise title et on y integre du text ( product.name soit le nom du produit dans l'api)
-    let name = document.getElementById('title').innerText = product.name
+    let imageUrl = (document.querySelector(".item__img").innerHTML =
+      articleImg) 
 
-    // LE PRIX
-    // On récupère la balise price et on y integre du text ( product.price soit le prix du produit dans l'api)
-    let price = document.getElementById('price').innerText = product.price
+    let name = (document.getElementById("title").innerText = product.name) 
 
-    // DESCRIPTION
+    let price = (document.getElementById("price").innerText = product.price) 
 
-    document.getElementById('description').innerText = product.description
+    document.getElementById("description").innerText = product.description 
 
-    // OPTIONS
+    let options = `<option value="">--SVP, choisissez une couleur --</option>` 
 
-    let options = `<option value="">--SVP, choisissez une couleur --</option>`
-
-    // On fait une boucle et on crée une variable (option) de l'API (product) et on veut les couleurs dispo (.colors)
     for (let option of product.colors) {
-      //on ajoute a options le resultat de la fonction (plus bas)
-      options += ` <option value="${option}">${option}</option>`
-      // on integre options à notre container "selection" (variable plus haut)
+      options += ` <option value="${option}">${option}</option>` 
     }
 
-    document.getElementById('colors').innerHTML = options
+    document.getElementById("colors").innerHTML = options 
 
+    document.getElementById("addToCart").addEventListener("click", (event) => {
+      event.preventDefault() 
 
-    //récupération du bouton ajouter au panier
-    document.getElementById('addToCart').addEventListener('click', (event) => {
-      event.preventDefault()
-      // récupération de la valeur de colors et quantity 
-      
-      const optionItem = document.getElementById('colors').value
-      const quantityItem = parseInt(document.getElementById('quantity').value)
+      const optionItem = document.getElementById("colors").value 
+      const quantityItem = parseInt(document.getElementById("quantity").value) 
 
-      // création de l'objet à envoyer dans le tableau cart 
-      const cart = JSON.parse(localStorage.getItem('cart')) || []
-      const founded = cart.find(e => e.id === id && e.option === optionItem)
+      const cart = JSON.parse(localStorage.getItem("cart")) || [] 
+
+      // Fonction permettant de verifier que deux items aient le même Id et la même option
+      const founded = cart.find((e) => e.id === id && e.option === optionItem) 
 
       if (founded) {
-        founded.quantity += quantityItem
+        founded.quantity += quantityItem 
       } else {
         cart.push({
           id: id,
           quantity: quantityItem,
           option: optionItem,
           name: name,
-          image : imageUrl,
-          price : price
-        })
+          image: imageUrl,
+          price: price,
+        }) 
       }
-      localStorage.setItem('cart', JSON.stringify(cart))
-      window.location.href = 'cart.html'
-    })
-  }
-  )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      localStorage.setItem("cart", JSON.stringify(cart)) 
+      window.location.href = "cart.html" 
+    }) 
+  }) 
