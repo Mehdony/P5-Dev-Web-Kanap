@@ -2,11 +2,14 @@
 const cart = JSON.parse(localStorage.getItem("cart"))
 const cartContainer = document.getElementById("cart__items")
 // const qtyValue = document.getElementsByClassName('itemQuantity')
+
 displayCart(cart)
 updateQuantity()
 displayTotal()
 deleteProduct()
 postForm()
+
+fetch()
 
 function displayCart(cart) {
 
@@ -280,9 +283,9 @@ function postForm() {
         .then((data) => {
 
           localStorage.removeItem('cart')
-          localStorage.setItem("orderId", data.orderId)
+          // localStorage.setItem("orderId", data.orderId)
 
-          window.location.href = "confirmation.html"
+          window.location.href = `confirmation.html?orderId=${data.orderId}`
         })
         .catch((err) => {
           alert("L'erreur suivante à été détectée: " + err.message)

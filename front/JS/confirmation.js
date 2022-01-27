@@ -1,9 +1,16 @@
-function showOrderID(){
-    const orderIdContainer = document.getElementById("orderId");
-    orderIdContainer.innerText = localStorage.getItem("orderId");
+// const chainederequete = surlapage.lachainederequetedanslurl.recherche
+const queryString = window.location.search
+// permet d'analyser les paramètres de  la chaîne de requête (parametre dans la console)
+const urlParams = new URLSearchParams(queryString)
+//permet d'obtenir l'id (id de la page (url))
+const id = urlParams.get('orderId')
 
-    const price = document.getElementById('price')
-    price.innerText = localStorage.getItem('total')
+
+function showOrderID(){
+
+    const orderIdContainer = document.getElementById("orderId");
+    orderIdContainer.innerText = id;
+
     
     localStorage.clear();
 }
