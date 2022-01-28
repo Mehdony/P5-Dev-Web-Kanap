@@ -1,7 +1,11 @@
 const cart = JSON.parse(localStorage.getItem("cart"))
+
+console.log("console log de cart")
+console.log(cart )
+
 const cartContainer = document.getElementById("cart__items")
 
-displayCart(cart)
+displayCart(cart.sort( (a, b)  => a.price - b.price ))
 updateQuantity()
 displayTotal()
 deleteProduct()
@@ -12,7 +16,8 @@ function displayCart(cart) {
   let modele = ""
 
   for (let product of cart) {
-    modele += `<article class="cart__item" data-id=${product.id} data-color="${product.option}">
+    modele += `<article class="cart__item" 
+    data-id=${product.id} data-color="${product.option}">
     <div class="cart__item__img">
      ${product.image}
     </div>
@@ -25,7 +30,8 @@ function displayCart(cart) {
       <div class="cart__item__content__settings">
         <div class="cart__item__content__settings__quantity">
           <p>Qté : </p>
-          <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.quantity}">
+          <input type="number" class="itemQuantity" 
+          name="itemQuantity" min="1" max="100" value="${product.quantity}">
         </div>
         <div class="cart__item__content__settings__delete">
           <p class="deleteItem">Supprimer</p>
@@ -96,7 +102,8 @@ function deleteProduct() {
 
       let idDelete = cart[i].id
       let colorDelete = cart[i].option
-      //fonction permettant de filtrer un item pour verifier si celui ci est bien l'item à supprimer
+      //fonction permettant de filtrer un item 
+      // pour verifier si celui ci est bien l'item à supprimer
       const productToDelete = cart.filter(
         (el) => el.id !== idDelete || el.option !== colorDelete
       )
@@ -114,16 +121,15 @@ function deleteProduct() {
 let form = document.querySelector(".cart__order__form")
 
 //Création des expressions régulières
-let emailRegExp = new RegExp(
-  "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$"
-)
+let emailRegExp = new RegExp( "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$")
 let addressRegExp = new RegExp(
   "^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+"
 )
 let charRegExp = new RegExp("^[a-zA-Z ,.'-]+$")
 
 // Ecoute de la modification du prénom
-form.firstName.addEventListener("change", function () {
+form.firstName.addEventListener("change", 
+function () {
   validFirstName(this)
 })
 

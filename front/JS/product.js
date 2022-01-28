@@ -31,7 +31,8 @@ fetch(`http://localhost:3000/api/products/${id}`)
       const cart = JSON.parse(localStorage.getItem("cart")) || [] 
 
       // Fonction permettant de verifier que deux items aient le même Id et la même option
-      const founded = cart.find((e) => e.id === id && e.option === optionItem) 
+      const founded = cart.find((e) => 
+      e.id === id && e.option === optionItem) 
 
       if (founded) {
         founded.quantity += quantityItem 
@@ -45,7 +46,8 @@ fetch(`http://localhost:3000/api/products/${id}`)
           price: price,
         }) 
       }
-      localStorage.setItem("cart", JSON.stringify(cart)) 
+      localStorage.setItem("cart", JSON.stringify(cart))
+      alert("Produit ajouté au panier") 
       window.location.href = "cart.html" 
     }) 
   }) 
